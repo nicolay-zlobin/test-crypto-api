@@ -5,10 +5,10 @@
         <a class="brand" href="#">Brand</a>
 
         <div class="tabs">
-          <router-link class="active" to="/">Exchanges</router-link>
-          <router-link to="/markets">Markets</router-link>
-          <router-link to="/trades">Trades</router-link>
-          <router-link to="/about">About</router-link>
+          <router-link exact-active-class="active" to="/">Exchanges</router-link>
+          <router-link exact-active-class="active" to="/markets">Markets</router-link>
+          <router-link exact-active-class="active" to="/trades">Trades</router-link>
+          <!--<router-link exact-active-class="active" to="/about">About</router-link>-->
         </div>
       </div>
 
