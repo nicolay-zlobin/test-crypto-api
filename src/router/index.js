@@ -1,14 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Exchanges from '../views/Exchanges.vue'
+import Markets from '../views/Markets.vue'
+import Trades from '../views/Trades.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Exchanges',
+    component: Exchanges
+  },
+  {
+    path: '/markets',
+    name: 'Markets',
+    component: Markets
+  },
+  {
+    path: '/trades',
+    name: 'Trades',
+    component: Trades
   },
   {
     path: '/about',
