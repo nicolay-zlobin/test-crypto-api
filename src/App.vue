@@ -1,31 +1,20 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark bg-dark">
-      <ul class="nav">
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="/exchanges">/exchanges</a>
-        </li>
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="brand" href="#">Brand</a>
 
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="/markets">/markets</a>
-        </li>
+        <div class="tabs">
+          <router-link class="active" to="/">Exchanges</router-link>
+          <router-link to="/markets">Markets</router-link>
+          <router-link to="/trades">Trades</router-link>
+          <router-link to="/about">About</router-link>
+        </div>
+      </div>
 
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="/trades">/trades</a>
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            href="/about">/about</a>
-        </li>
-      </ul>
+      <div class="nav-right">
+        <a class="button outline">Button</a>
+      </div>
     </nav>
 
     <router-view/>
@@ -33,7 +22,4 @@
 </template>
 
 <style lang="scss">
-  .nav-link {
-    font-family: $font-family-monospace;
-  }
 </style>

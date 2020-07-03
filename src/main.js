@@ -3,8 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import '@/assets/style/bootstrap.scss'
+// import '@/assets/style/bootstrap.scss'
 import '@/assets/style/style.scss'
+// import 'chota'
 
 import VueMeta from 'vue-meta'
 import axios from 'axios'

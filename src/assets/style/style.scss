@@ -1,9 +1,6 @@
-@import "../../../node_modules/bootstrap/scss/_functions.scss";
-@import "../../../node_modules/bootstrap/scss/_variables.scss";
-@import "../../../node_modules/bootstrap/scss/mixins";
-
+@import "chota";
+@import "properties";
 @import "common";
 @import "typography.scss";
-@import "variables";
 @import "utility";
 @import "animate.scss";
