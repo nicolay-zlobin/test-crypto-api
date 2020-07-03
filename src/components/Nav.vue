@@ -16,7 +16,7 @@
     </div>
 
     <div class="nav-right">
-      <a class="button outline">Button</a>
+      <ThemeSwitch/>
     </div>
   </nav>
 </template>
@@ -25,15 +25,21 @@
   .nav {
     margin-bottom: 16px;
   }
+  .nav-right {
+    margin-right: 16px;
+    align-items: center;
+  }
 </style>
 
 <script>
 import wolfIcon from '@/assets/svg/wolf-pack-battalion.svg'
+import ThemeSwitch from '@/components/ThemeSwitch'
 
 export default {
   name: 'Nav',
   components: {
-    wolfIcon
+    wolfIcon,
+    ThemeSwitch
   },
   data () {
     return {}

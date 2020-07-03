@@ -7,8 +7,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    theme: 'dark'
   },
   mutations: {
+    SET_THEME (state, payload) {
+      state.theme = payload
+    }
   },
   actions: {
   },
