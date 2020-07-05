@@ -2,7 +2,7 @@
   <transition
     :name="animationName"
     mode="out-in">
-    <tr :key="`${trade.price}_${Math.random()}`">
+    <tr :key="`${trade.exchange}_${trade.base}_${trade.quote}_${trade.timestamp}`">
       <slot/>
     </tr>
   </transition>

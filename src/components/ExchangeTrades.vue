@@ -6,7 +6,7 @@
 
     <div
       v-if="trades.length > 0"
-      class="table-wrapper">
+      class="table-wrapper mb-40">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -56,6 +56,13 @@
           </ExchangeTradeRow>
         </tbody>
       </table>
+
+      <div
+        v-if="isShowMoreVisible"
+        class="table-show-more"
+        @click="showMore">
+        Show more
+      </div>
     </div>
   </div>
 </template>
@@ -87,7 +94,9 @@ export default {
   },
   data () {
     return {
-      trades: []
+      trades: [],
+      limit: 8,
+      isShowMoreVisible: true
     }
   },
   computed: {},
@@ -108,6 +117,9 @@ export default {
   mounted () {
   },
   methods: {
+    showMore () {
+      this.limit = this.limit + 5
+    },
     addNewItem (item) {
       const index = this.trades.findIndex((el) => {
         return el.base === item.base && el.quote === item.quote
@@ -117,7 +129,7 @@ export default {
         this.$set(this.trades, index, item)
       }
       else {
-        if (this.trades.length < 10) {
+        if (this.trades.length < this.limit) {
           this.trades.push(item)
         }
       }
