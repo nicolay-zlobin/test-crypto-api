@@ -40,7 +40,9 @@
         <tbody>
           <tr
             v-for="(item, i) in list"
-            :key="i">
+            :key="i"
+            class="is-pointer"
+            @click="$router.push(`/trades/${item.exchangeId}`)">
             <td>
               <span class="text-uppercase">{{ item.exchangeId }}</span>
             </td>
