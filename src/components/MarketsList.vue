@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--<p>Select exchange</p>-->
-    {{ $route.params.exchangeId }}
+    <!--{{ $route.params.exchangeId }}-->
     <div
       v-if="list.length > 0"
       class="table-wrapper">
@@ -21,7 +21,7 @@
             v-for="(item, i) in list"
             :key="i"
             class="is-pointer"
-            @click="$router.push(`/trades/${item.exchangeId}-${item.baseSymbol.toLowerCase()}-${item.quoteSymbol.toLowerCase()}`) ">
+            @click="$router.push(`/chart/${item.exchangeId}-${item.baseSymbol.toLowerCase()}-${item.quoteSymbol.toLowerCase()}`) ">
             <td>
               <span class="text-uppercase">{{ item.exchangeId }}</span>
             </td>

@@ -2,8 +2,9 @@
   <transition
     :name="animationName"
     mode="out-in">
-    <tr :key="`${trade.exchange}_${trade.base}_${trade.quote}_${trade.timestamp}`">
+    <tr :key="`${trade.exchange}_${trade.base}_${trade.quote}_${trade.price}_${trade.timestamp}`">
       <slot/>
+      <!--{{ // `${trade.exchange}_${trade.base}_${trade.quote}_${trade.price}_${trade.timestamp}` }}-->
     </tr>
   </transition>
 </template>

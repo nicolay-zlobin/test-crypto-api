@@ -11,7 +11,7 @@
         <router-link exact-active-class="active" to="/">Exchanges</router-link>
         <router-link active-class="active" to="/markets">Markets</router-link>
         <router-link active-class="active" to="/trades">Trades</router-link>
-        <!--<router-link exact-active-class="active" to="/about">About</router-link>-->
+        <router-link active-class="active" to="/chart">Chart</router-link>
       </div>
     </div>
 

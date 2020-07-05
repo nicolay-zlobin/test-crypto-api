@@ -8,6 +8,8 @@
       v-if="!loading && candles.length === 0"
       class="text-grey">
       Sorry, there is no data for <span class="text-uppercase">{{ market[0] }} {{ market[1] }}/{{ market[2] }}</span>.
+      Try to choose another
+      <router-link to="/">market</router-link>
     </p>
 
     <div class="d-flex justify-content-center mt-5 mb-5">

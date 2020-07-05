@@ -19,7 +19,7 @@
             v-for="(item, i) in list"
             :key="i"
             class="is-pointer"
-            @click="$router.push(`/markets/${item.exchangeId}`) ">
+            @click="$router.push(`/trades/${item.exchangeId}`) ">
             <td>
               {{ item.name }}
             </td>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Exchanges from '../views/Exchanges.vue'
 import Markets from '../views/Markets.vue'
 import Trades from '../views/Trades.vue'
+import Chart from '@/views/Chart'
 
 Vue.use(VueRouter)
 
@@ -31,6 +32,16 @@ const routes = [
     path: '/trades/:exchangeId',
     name: 'TradesExchange',
     component: Trades
+  },
+  {
+    path: '/chart',
+    name: 'Chart',
+    component: Chart
+  },
+  {
+    path: '/chart/:market',
+    name: 'ChartMarket',
+    component: Chart
   },
   {
     path: '/about',

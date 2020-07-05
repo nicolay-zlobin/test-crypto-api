@@ -1,8 +1,14 @@
 <template>
   <div>
     <h2>
-      <span class="text-uppercase">{{ market[0] }}</span> real-time trades
+      <span class="text-uppercase">{{ market }}</span> trades
     </h2>
+
+    <p v-if="isError">
+      Sorry, there is no data for <span class="text-uppercase">{{ market }}</span>,
+      try to choose another
+      <router-link to="/">exchange</router-link>
+    </p>
 
     <div
       v-if="trades.length > 0"
@@ -87,31 +93,41 @@ export default {
   },
   props: {
     market: {
-      type: Array,
-      default: () => [],
+      type: String,
+      default: '',
       required: true
     }
   },
   data () {
     return {
+      tradeWs: {},
       trades: [],
       limit: 8,
-      isShowMoreVisible: true
+      isShowMoreVisible: true,
+      isError: false
     }
   },
   computed: {},
+  beforeDestroy () {
+    this.tradeWs.close()
+  },
   created () {
-    const tradeWs = new WebSocket('wss://ws.coincap.io/trades/binance')
+    this.tradeWs = new WebSocket(`wss://ws.coincap.io/trades/${this.market}`)
 
-    tradeWs.onerror = function (err) {
+    this.tradeWs.onerror = function (err) {
       console.error('Socket encountered error: ', err.message, 'Closing socket')
-      tradeWs.close()
+      this.tradeWs.close()
     }
 
     const vm = this
 
-    tradeWs.onmessage = function (msg) {
-      vm.addNewItem(JSON.parse(msg.data))
+    this.tradeWs.onmessage = function (msg) {
+      if (msg.data.includes('invalid')) {
+        vm.isError = true
+      }
+      else {
+        vm.addNewItem(JSON.parse(msg.data))
+      }
     }
   },
   mounted () {
