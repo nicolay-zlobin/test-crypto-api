@@ -1,5 +1,7 @@
 <template>
-  <div class="container">
+  <section class="container">
+    <h1>List of exchanges</h1>
+
     <div
       v-if="list.length > 0"
       class="table-wrapper">
@@ -70,7 +72,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,7 +1,28 @@
 <template>
-  <div class="container">
-    <!--<p>Select exchange</p>-->
-    <!--{{ $route.params.exchangeId }}-->
+  <section class="container">
+    <h1>Markets</h1>
+
+    <div class="filter filter-exchange">
+      <label
+        class="mb-10 filter-label"
+        for="exchanges">Select exchange to filter markets:</label>
+
+      <select
+        id="exchanges"
+        v-model="selectedExchange"
+        class="mb-30"
+        name="exchanges"
+        @change="updateMarkets">
+        <option value="">--Choose an exchange--</option>
+        <option
+          v-for="(item, i) in exchanges"
+          :key="i"
+          :value="item.exchangeId">
+          {{ item.name }}
+        </option>
+      </select>
+    </div>
+
     <div
       v-if="list.length > 0"
       class="table-wrapper">
@@ -19,9 +40,7 @@
         <tbody>
           <tr
             v-for="(item, i) in list"
-            :key="i"
-            class="is-pointer"
-            @click="$router.push(`/chart/${item.exchangeId}-${item.baseSymbol.toLowerCase()}-${item.quoteSymbol.toLowerCase()}`) ">
+            :key="i">
             <td>
               <span class="text-uppercase">{{ item.exchangeId }}</span>
             </td>
@@ -60,31 +79,50 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </template>
+
+<style lang="scss" scoped>
+  .filter.filter-exchange {
+    max-width: 300px;
+    .filter-label {
+      display: block;
+    }
+  }
+</style>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import 'vue-select/dist/vue-select.css'
 
 export default {
   name: 'MarketsList',
   components: {},
   data () {
-    return {}
+    return {
+      selectedExchange: this.$route.params.exchangeId || ''
+    }
   },
   computed: {
     ...mapState({
       list: state => state.markets.list,
+      exchanges: state => state.exchanges.list,
       loading: state => state.markets.loading
     })
   },
   mounted () {
-    this.getMarkets()
+    this.getMarkets({ exchangeId: this.selectedExchange })
+    this.getExchanges()
   },
   methods: {
     ...mapActions({
-      getMarkets: 'markets/getMarkets'
-    })
+      getMarkets: 'markets/getMarkets',
+      getExchanges: 'exchanges/getExchanges'
+    }),
+    updateMarkets () {
+      this.$router.push(`/markets/${this.selectedExchange}`)
+      this.getMarkets({ exchangeId: this.selectedExchange })
+    }
   }
 }
 </script>

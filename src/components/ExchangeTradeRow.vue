@@ -4,7 +4,6 @@
     mode="out-in">
     <tr :key="`${trade.exchange}_${trade.base}_${trade.quote}_${trade.price}_${trade.timestamp}`">
       <slot/>
-      <!--{{ // `${trade.exchange}_${trade.base}_${trade.quote}_${trade.price}_${trade.timestamp}` }}-->
     </tr>
   </transition>
 </template>
@@ -45,8 +44,8 @@ export default {
   },
   computed: {},
   watch: {
-    'trade.direction' (value) {
-      this.animationName = value === 'buy' ? 'fade-green' : 'fade-red'
+    'trade' (value) {
+      this.animationName = value.direction === 'buy' ? 'fade-green' : 'fade-red'
     }
   },
   mounted () {

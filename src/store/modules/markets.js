@@ -6,9 +6,14 @@ const state = {
 const getters = {}
 
 const actions = {
-  async getMarkets ({ commit }) {
+  async getMarkets ({ commit }, params = {}) {
     await this._vm.$http
-      .get(`${process.env.VUE_APP_COINCAP_BASE_URL}/markets`)
+      .get(`${process.env.VUE_APP_COINCAP_BASE_URL}/markets`, {
+        params: {
+          // ...condition && { prop: value }
+          ...params.exchangeId && { exchangeId: params.exchangeId }
+        }
+      })
       .then((res) => {
         commit('SET_MARKETS', res.data.data)
       })

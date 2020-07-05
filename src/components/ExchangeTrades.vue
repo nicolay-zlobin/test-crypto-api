@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <h2>
       <span class="text-uppercase">{{ market }}</span> trades
     </h2>
@@ -30,7 +30,9 @@
           <ExchangeTradeRow
             v-for="(item, i) in trades"
             :key="i"
-            :trade="item">
+            class="is-pointer"
+            :trade="item"
+            @click.native="$router.push(`/chart/${item.exchange}-${item.base.toLowerCase()}-${item.quote.toLowerCase()}`) ">
             <td>
               <span class="text-uppercase">
                 {{ item.exchange }}
@@ -70,7 +72,7 @@
         Show more
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

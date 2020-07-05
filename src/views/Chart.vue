@@ -2,7 +2,7 @@
   <div class="container">
     <p v-if="!market">
       Choose market
-      <router-link to="/markets">here</router-link>
+      <router-link to="/markets/poloniex">here</router-link>
       to draw chart
     </p>
 

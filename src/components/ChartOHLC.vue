@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <section>
     <h2 class="text-uppercase">
       {{ market[0] }} {{ market[1] }}/{{ market[2] }}
     </h2>
@@ -17,7 +17,7 @@
         id="chart"
         ref="chart"/>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped lang="scss">
