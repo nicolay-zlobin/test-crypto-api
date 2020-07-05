@@ -12,13 +12,13 @@ import ExchangesList from '@/components/ExchangesList'
 
 export default {
   name: 'Exchanges',
-  components: {
-    ExchangesList
-  },
   metaInfo () {
     return {
       title: 'Exchanges'
     }
+  },
+  components: {
+    ExchangesList
   },
   data () {
     return {}

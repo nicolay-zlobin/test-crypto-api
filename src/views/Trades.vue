@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <p v-if="!exchangeId">
-      Choose exchange
+      Choose an exchange
       <router-link to="/">here</router-link>
       to see trades
     </p>
@@ -19,6 +19,11 @@ import ExchangeTrades from '@/components/ExchangeTrades'
 
 export default {
   name: 'Trades',
+  metaInfo () {
+    return {
+      title: this.title
+    }
+  },
   components: {
     ExchangeTrades
   },
@@ -28,6 +33,11 @@ export default {
   computed: {
     exchangeId () {
       return this.$route.params.exchangeId
+    },
+    title () {
+      const exchangeId = this.$route.params.exchangeId
+
+      return exchangeId ? `Trades :: ${exchangeId.toUpperCase()}` : 'Trades'
     }
   },
   created () {

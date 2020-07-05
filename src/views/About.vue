@@ -11,6 +11,11 @@
 
 export default {
   name: 'About',
+  metaInfo () {
+    return {
+      title: 'About'
+    }
+  },
   components: {},
   data () {
     return {}
