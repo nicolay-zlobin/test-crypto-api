@@ -18,6 +18,11 @@ const routes = [
     component: Markets
   },
   {
+    path: '/markets/:exchangeId',
+    name: 'MarketsWithExchange',
+    component: Markets
+  },
+  {
     path: '/trades',
     name: 'Trades',
     component: Trades

@@ -3,9 +3,13 @@
     <div v-if="$route.params.exchangeId">
       <Tabs>
         <Tab
-          name="OHLC"
+          name="Chart"
           :selected="true">
-          <h1>OHLC</h1>
+          <h1 class="text-uppercase">
+            {{ market[0] }} {{ market[1] }}/{{ market[2] }}
+          </h1>
+
+          <ChartOHLC :market="market"/>
         </Tab>
 
         <Tab name="Trades list">
@@ -27,15 +31,19 @@
 
 import Tabs from '@/components/Functional/Tabs'
 import Tab from '@/components/Functional/Tab'
+import ChartOHLC from '@/components/ChartOHLC'
 
 export default {
   name: 'Trades',
   components: {
     Tabs,
-    Tab
+    Tab,
+    ChartOHLC
   },
   data () {
-    return {}
+    return {
+      market: this.$route.params.exchangeId.split('-')
+    }
   },
   computed: {},
   methods: {}
