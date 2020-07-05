@@ -1,5 +1,6 @@
 const state = {
-  list: []
+  list: [],
+  loading: false
 }
 
 const getters = {}
@@ -11,12 +12,18 @@ const actions = {
       .then((res) => {
         commit('SET_MARKETS', res.data.data)
       })
+      .finally(() => {
+        commit('SET_LOADING', false)
+      })
   }
 }
 
 const mutations = {
   SET_MARKETS (state, payload) {
     state.list = payload
+  },
+  SET_LOADING (state, payload) {
+    state.loading = payload
   }
 }
 

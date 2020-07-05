@@ -4,6 +4,7 @@
     @click="toggleTheme">
     <component
       :is="theme === 'dark' ? 'sunIcon' : 'moonStars'"
+      class="button-theme-icon"
       width="20px"/>
   </button>
 </template>
@@ -17,6 +18,9 @@
     color: var(--font-color);
     background-color: var(--bg-secondary-color);
     height: 35px;
+  }
+  .button-theme-icon {
+    padding: 2px;
   }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Markets.vue
+    <MarketsList/>
   </div>
 </template>
 
@@ -8,10 +8,13 @@
 </style>
 
 <script>
+import MarketsList from '@/components/MarketsList'
 
 export default {
   name: 'Markets',
-  components: {},
+  components: {
+    MarketsList
+  },
   data () {
     return {}
   },
