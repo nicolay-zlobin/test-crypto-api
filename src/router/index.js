@@ -23,6 +23,11 @@ const routes = [
     component: Trades
   },
   {
+    path: '/trades/:exchangeId',
+    name: 'TradesExchange',
+    component: Trades
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
