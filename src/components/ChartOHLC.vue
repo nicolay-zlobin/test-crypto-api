@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h2 class="text-uppercase">
+      {{ market[0] }} {{ market[1] }}/{{ market[2] }}
+    </h2>
+
     <p
       v-if="!loading && candles.length === 0"
       class="text-grey">

@@ -37,10 +37,7 @@ export default {
   methods: {
     selectTab (selectedTab) {
       this.tabs.forEach(tab => {
-        // const tabName = '#' + selectedTab.name.toLowerCase().replace(/ /g, '-')
-        // console.log(tabName, location.hash, location.hash === tabName)
-
-        tab.isActive = (tab.name === selectedTab.name)
+        tab.isActive = tab.name === selectedTab.name
       })
     }
   }
