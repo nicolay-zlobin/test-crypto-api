@@ -1,11 +1,7 @@
 <template>
   <section>
-    <h2>
-      <span class="text-uppercase">{{ market }}</span> trades
-    </h2>
-
     <p v-if="isError">
-      Sorry, there is no data for <span class="text-uppercase">{{ market }}</span>,
+      Sorry, there is no data for <span class="text-uppercase">{{ exchange }}</span>,
       try to choose another
       <router-link to="/">exchange</router-link>
     </p>
@@ -20,10 +16,11 @@
             <th>Base</th>
             <th>Quote</th>
             <th>Direction</th>
-            <th style="width: 130px">Price</th>
-            <th style="width: 130px">Price (USD)</th>
-            <th style="width: 130px">Volume</th>
+            <th style="min-width: 140px; width: 140px">Price</th>
+            <th style="min-width: 140px; width: 140px">Price (USD)</th>
+            <th style="min-width: 140px; width: 140px">Volume</th>
             <th>Date</th>
+            <th>OHLC</th>
           </tr>
         </thead>
         <tbody>
@@ -56,10 +53,17 @@
               <small>${{ parseFloat(item.priceUsd).toFixed(2) }}</small>
             </td>
             <td>
-              <small>{{ item.volume }}</small>
+              <small>{{ parseFloat(item.volume).toFixed(3) }}</small>
             </td>
             <td>
               <small class="text-grey">{{ item.timestamp | parseDate }}</small>
+            </td>
+            <td>
+              <router-link
+                :to="`/chart/${item.exchange}-${item.base.toLowerCase()}-${item.quote.toLowerCase()}`"
+                @click.stop>
+                Link
+              </router-link>
             </td>
           </ExchangeTradeRow>
         </tbody>
@@ -94,7 +98,7 @@ export default {
     }
   },
   props: {
-    market: {
+    exchange: {
       type: String,
       default: '',
       required: true
@@ -110,31 +114,43 @@ export default {
     }
   },
   computed: {},
+  watch: {
+    exchange (value) {
+      if (value) {
+        this.getTrades()
+      }
+    }
+  },
   beforeDestroy () {
     this.tradeWs.close()
   },
   created () {
-    this.tradeWs = new WebSocket(`wss://ws.coincap.io/trades/${this.market}`)
-
-    this.tradeWs.onerror = function (err) {
-      console.error('Socket encountered error: ', err.message, 'Closing socket')
-      this.tradeWs.close()
-    }
-
-    const vm = this
-
-    this.tradeWs.onmessage = function (msg) {
-      if (msg.data.includes('invalid')) {
-        vm.isError = true
-      }
-      else {
-        vm.addNewItem(JSON.parse(msg.data))
-      }
-    }
   },
   mounted () {
+    if (this.exchange) {
+      this.getTrades()
+    }
   },
   methods: {
+    getTrades () {
+      this.tradeWs = new WebSocket(`wss://ws.coincap.io/trades/${this.exchange}`)
+
+      this.tradeWs.onerror = function (err) {
+        console.error('Socket encountered error: ', err.message, 'Closing socket')
+        this.tradeWs.close()
+      }
+
+      const vm = this
+
+      this.tradeWs.onmessage = function (msg) {
+        if (msg.data.includes('invalid')) {
+          vm.isError = true
+        }
+        else {
+          vm.addNewItem(JSON.parse(msg.data))
+        }
+      }
+    },
     showMore () {
       this.limit = this.limit + 5
     },

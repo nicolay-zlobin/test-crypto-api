@@ -21,8 +21,6 @@ const actions = {
   async getCandles ({ commit }, { exchange, baseId, quoteId }) {
     commit('SET_LOADING', true)
 
-    console.log(exchange, baseId, quoteId)
-
     await this._vm.$http
       .get(`${process.env.VUE_APP_COINCAP_BASE_URL}/candles`, {
         params: {

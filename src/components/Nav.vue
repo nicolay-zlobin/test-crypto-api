@@ -1,24 +1,26 @@
 <template>
-  <nav class="nav">
-    <div class="nav-left">
-      <router-link
-        class="brand"
-        to="/">
-        <wolfIcon width="30px"/>
-      </router-link>
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <router-link
+          class="brand"
+          to="/">
+          <wolfIcon width="30px"/>
+        </router-link>
 
-      <div class="tabs">
-        <router-link exact-active-class="active" to="/">Exchanges</router-link>
-        <router-link active-class="active" to="/markets">Markets</router-link>
-        <router-link active-class="active" to="/trades">Trades</router-link>
-        <router-link active-class="active" to="/chart">Chart</router-link>
+        <div class="tabs">
+          <router-link exact-active-class="active" to="/">Exchanges</router-link>
+          <router-link active-class="active" to="/markets">Markets</router-link>
+          <router-link active-class="active" to="/trades">Trades</router-link>
+          <router-link active-class="active" to="/chart">Chart</router-link>
+        </div>
       </div>
-    </div>
 
-    <div class="nav-right">
-      <ThemeSwitch/>
-    </div>
-  </nav>
+      <div class="nav-right">
+        <ThemeSwitch/>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <style>
