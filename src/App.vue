@@ -18,6 +18,9 @@ export default {
     return {}
   },
   computed: {},
+  created () {
+    document.body.setAttribute('data-theme', this.$store.state.theme)
+  },
   mounted () {
   },
   methods: {}

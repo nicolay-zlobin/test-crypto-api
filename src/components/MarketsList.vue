@@ -95,7 +95,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import 'vue-select/dist/vue-select.css'
 
 export default {
   name: 'MarketsList',
