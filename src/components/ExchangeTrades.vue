@@ -29,7 +29,7 @@
             :key="i"
             class="is-pointer"
             :trade="item"
-            @click.native="$router.push(`/chart/${item.exchange}-${item.base.toLowerCase()}-${item.quote.toLowerCase()}`) ">
+            @click.native="$router.push(`/chart/${item.exchange}–${item.base.toLowerCase()}–${item.quote.toLowerCase()}`) ">
             <td>
               <span class="text-uppercase">
                 {{ item.exchange }}

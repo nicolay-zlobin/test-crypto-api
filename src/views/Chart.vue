@@ -40,7 +40,7 @@ export default {
     market () {
       const market = this.$route.params.market
 
-      return market ? market.split('-') : ''
+      return market ? market.split('–') : ''
     },
     title () {
       const market = this.market
