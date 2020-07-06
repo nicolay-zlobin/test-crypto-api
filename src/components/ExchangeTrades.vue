@@ -50,10 +50,10 @@
               <small>{{ item.price }}</small>
             </td>
             <td>
-              <small>${{ parseFloat(item.priceUsd).toFixed(2) }}</small>
+              <small>${{ parseFloat(item.priceUsd.toFixed(2)) }}</small>
             </td>
             <td>
-              <small>{{ parseFloat(item.volume).toFixed(3) }}</small>
+              <small>{{ parseFloat(item.volume.toFixed(3)) }}</small>
             </td>
             <td>
               <small class="text-grey">{{ item.timestamp | parseDate }}</small>
