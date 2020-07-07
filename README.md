@@ -8,11 +8,10 @@ Use coincap.io API to build a dashboard with following features:
   - Tab 1: candle OHLC chart
   - Tab 2: real time updates with last traded price table
 
-Bonus: Price table sorting, filtering, show-more (infinite scroll)
+Demo: https://test-crypto-api.hostman.site/
 
-Preferred frontend: Vue.js
+Frontend: Vue.js
 
-Delivery: github
 
 ## NPM tasks
 
