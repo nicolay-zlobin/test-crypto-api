@@ -6,6 +6,10 @@
       <router-link to="/">exchange</router-link>
     </p>
 
+    <p v-else-if="trades.length === 0">
+      There're no trades yet. Wait a minute.
+    </p>
+
     <div
       v-if="trades.length > 0"
       class="table-wrapper mb-40">
@@ -19,7 +23,7 @@
             <th style="min-width: 140px; width: 140px">Price</th>
             <th style="min-width: 140px; width: 140px">Price (USD)</th>
             <th style="min-width: 140px; width: 140px">Volume</th>
-            <th>Date</th>
+            <th style="min-width: 132px; width: 132px">Date</th>
             <th>OHLC</th>
           </tr>
         </thead>
@@ -73,7 +77,7 @@
         v-if="isShowMoreVisible"
         class="table-show-more"
         @click="showMore">
-        Show more <small class="ml-10">(Limit: {{ limit }})</small>
+        Show more <small class="ml-10">(Current limit: {{ limit }})</small>
       </div>
     </div>
   </section>
