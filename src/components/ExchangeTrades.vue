@@ -73,7 +73,7 @@
         v-if="isShowMoreVisible"
         class="table-show-more"
         @click="showMore">
-        Show more
+        Show more <small class="ml-10">(Limit: {{ limit }})</small>
       </div>
     </div>
   </section>
@@ -108,7 +108,7 @@ export default {
     return {
       tradeWs: {},
       trades: [],
-      limit: 8,
+      limit: 10,
       isShowMoreVisible: true,
       isError: false
     }
