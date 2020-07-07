@@ -4,9 +4,6 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-</style>
-
 <script>
 import ExchangesList from '@/components/ExchangesList'
 

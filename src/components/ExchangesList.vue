@@ -3,8 +3,8 @@
     <h1>List of exchanges</h1>
 
     <div
-      v-if="list.length > 0"
-      class="table-wrapper">
+      v-if="exchanges.length > 0"
+      class="table-wrapper mb-40">
       <table class="table table-hover">
         <thead>
           <tr>
@@ -18,12 +18,12 @@
         </thead>
         <tbody>
           <tr
-            v-for="(item, i) in list"
+            v-for="(item, i) in exchanges"
             :key="i"
             class="is-pointer"
             @click="$router.push(`/trades/${item.exchangeId}`) ">
             <td>
-              {{ item.name }}
+              {{ item.name }} {{ item.rank }}
             </td>
             <!-- Daily volume represented in USD -->
             <td>
@@ -71,12 +71,19 @@
           </tr>
         </tbody>
       </table>
+
+      <div
+        v-if="!isEndOfList"
+        class="table-show-more"
+        @click="showMore">
+        Show more
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'ExchangesList',
@@ -86,17 +93,29 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.exchanges.list,
-      loading: state => state.exchanges.loading
+      exchanges: state => state.exchanges.list,
+      loading: state => state.exchanges.loading,
+      limit: state => state.exchanges.limit,
+      isEndOfList: state => state.exchanges.isEndOfList,
+      offset: state => state.exchanges.offset
     })
   },
   mounted () {
+    this.setOffset(0)
+    this.setExchanges([])
     this.getExchanges()
   },
   methods: {
+    ...mapMutations({
+      setOffset: 'exchanges/SET_OFFSET',
+      setExchanges: 'exchanges/SET_EXCHANGES'
+    }),
     ...mapActions({
       getExchanges: 'exchanges/getExchanges'
-    })
+    }),
+    showMore () {
+      this.getExchanges()
+    }
   }
 }
 </script>
