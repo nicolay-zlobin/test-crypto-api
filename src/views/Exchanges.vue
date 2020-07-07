@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <ExchangesList/>
-  </div>
+  <ExchangesList/>
 </template>
 
 <script>

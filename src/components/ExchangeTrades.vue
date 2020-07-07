@@ -23,7 +23,7 @@
             <th style="min-width: 140px; width: 140px">Price</th>
             <th style="min-width: 140px; width: 140px">Price (USD)</th>
             <th style="min-width: 140px; width: 140px">Volume</th>
-            <th style="min-width: 132px; width: 132px">Date</th>
+            <th style="min-width: 135px; width: 135px">Date</th>
             <th>OHLC</th>
           </tr>
         </thead>

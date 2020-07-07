@@ -25,7 +25,7 @@
 
     <div
       v-if="list.length > 0"
-      class="table-wrapper">
+      class="table-wrapper mb-40">
       <table class="table table-hover">
         <thead>
           <tr>

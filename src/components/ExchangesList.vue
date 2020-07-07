@@ -27,9 +27,9 @@
             </td>
             <!-- Daily volume represented in USD -->
             <td>
-              <template v-if="item.volumeUsd">
+              <small v-if="item.volumeUsd">
                 ${{ parseFloat(item.volumeUsd).toFixed(2) }}
-              </template>
+              </small>
 
               <template v-else>
                 <span class="text-dark">–</span>
@@ -38,19 +38,19 @@
             <!-- The amount of daily volume a single exchange transacts in relation
                  to total daily volume of all exchanges -->
             <td>
-              <span
+              <small
                 v-if="item.percentTotalVolume"
                 :class="[item.percentTotalVolume > 0 ? 'text-success' : 'text-error']">
                 ${{ parseFloat(item.percentTotalVolume).toFixed(2) }}
-              </span>
+              </small>
 
               <span v-else class="text-dark">–</span>
             </td>
             <!-- Number of trading pairs (or markets) offered by exchange -->
             <td>
-              <span v-if="item.tradingPairs > 0">
+              <small v-if="item.tradingPairs > 0">
                 {{ item.tradingPairs }}
-              </span>
+              </small>
 
               <span v-else class="text-dark">–</span>
             </td>
