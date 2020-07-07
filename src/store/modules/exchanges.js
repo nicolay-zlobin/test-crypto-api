@@ -1,7 +1,7 @@
 const state = {
   list: [],
   loading: false,
-  limit: 15,
+  limit: 12,
   offset: 0,
   isEndOfList: false
 }
@@ -9,13 +9,17 @@ const state = {
 const getters = {}
 
 const actions = {
-  async getExchanges ({ commit, state }) {
+  resetExchanges ({ commit }) {
+    commit('SET_OFFSET', 0)
+    commit('SET_EXCHANGES', [])
+  },
+  async getExchanges ({ commit, state }, { limit }) {
     commit('SET_LOADING', true)
 
     await this._vm.$http
       .get(`${process.env.VUE_APP_COINCAP_BASE_URL}/exchanges`, {
         params: {
-          limit: state.limit,
+          limit: limit || state.limit,
           offset: state.offset
         }
       })

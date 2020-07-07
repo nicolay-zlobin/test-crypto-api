@@ -105,26 +105,24 @@ export default {
       offset: state => state.exchanges.offset
     })
   },
-  mounted () {
-    this.setOffset(0)
-    this.setExchanges([])
-    this.getExchanges()
+  created () {
+    this.resetExchanges()
+    this.getExchanges({})
   },
   methods: {
     ...mapMutations({
-      setOffset: 'exchanges/SET_OFFSET',
-      setExchanges: 'exchanges/SET_EXCHANGES',
       setLoading: 'exchanges/SET_LOADING'
     }),
     ...mapActions({
-      getExchanges: 'exchanges/getExchanges'
+      getExchanges: 'exchanges/getExchanges',
+      resetExchanges: 'exchanges/resetExchanges'
     }),
     showMore () {
       this.setLoading(true)
       this.loadExchanges()
     },
     loadExchanges: debounce(function () {
-      this.getExchanges()
+      this.getExchanges({})
     }, 500)
   }
 }

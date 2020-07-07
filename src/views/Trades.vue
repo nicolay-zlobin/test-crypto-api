@@ -85,9 +85,7 @@ export default {
     }
   },
   mounted () {
-    if (this.exchanges.length === 0) {
-      this.getExchanges()
-    }
+    this.getExchanges({ limit: 100 })
   },
   methods: {
     ...mapActions({

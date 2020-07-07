@@ -12,7 +12,7 @@
         v-model="selectedExchange"
         class="mb-30"
         name="exchanges"
-        @change="updateMarkets">
+        @change="filterMarketsByExchange">
         <option value="">--Choose an exchange--</option>
         <option
           v-for="(item, i) in exchanges"
@@ -29,10 +29,10 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Exchange name</th>
-            <th>Pair</th>
-            <th>Price</th>
-            <th>Volume (24Hr)</th>
+            <th style="min-width: 185px; width: 185px">Exchange name</th>
+            <th style="min-width: 185px; width: 185px">Pair</th>
+            <th style="min-width: 130px; width: 130px">Price</th>
+            <th style="min-width: 180px; width: 180px">Volume (24Hr)</th>
             <th>Volume % (24Hr)</th>
             <th>Trades count (24Hr)</th>
           </tr>
@@ -52,12 +52,12 @@
             </td>
 
             <td>
-              {{ parseFloat(item.priceQuote).toFixed(2) }}
+              <small>{{ parseFloat(item.priceQuote).toFixed(2) }}</small>
             </td>
 
             <td>
               <span v-if="item.volumeUsd24Hr > 0">
-                ${{ parseFloat(item.volumeUsd24Hr).toFixed(2) }}
+                <small>${{ parseFloat(item.volumeUsd24Hr).toFixed(2) }}</small>
               </span>
 
               <span v-else class="text-dark">–</span>
@@ -67,19 +67,27 @@
               <span
                 v-if="item.percentExchangeVolume"
                 :class="[item.percentExchangeVolume > 0 ? 'text-success' : 'text-error']">
-                {{ parseFloat(item.percentExchangeVolume).toFixed(2) }}
+                <small>{{ parseFloat(item.percentExchangeVolume).toFixed(2) }}</small>
               </span>
 
               <span v-else class="text-dark">–</span>
             </td>
 
             <td>
-              <span v-if="item.tradesCount24Hr">{{ item.tradesCount24Hr }}</span>
+              <small v-if="item.tradesCount24Hr">{{ item.tradesCount24Hr }}</small>
               <span v-else class="text-dark">–</span>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <div
+        v-if="!isEndOfList"
+        class="table-show-more"
+        @click="showMore">
+        <span v-show="!loading">Show more</span>
+        <Spinner v-show="loading"/>
+      </div>
     </div>
   </section>
 </template>
@@ -94,11 +102,15 @@
 </style>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
+import { debounce } from 'lodash'
+import Spinner from '@/components/Functional/Spinner'
 
 export default {
   name: 'MarketsList',
-  components: {},
+  components: {
+    Spinner
+  },
   data () {
     return {
       selectedExchange: this.$route.params.exchangeId || ''
@@ -107,23 +119,45 @@ export default {
   computed: {
     ...mapState({
       list: state => state.markets.list,
-      exchanges: state => state.exchanges.list,
-      loading: state => state.markets.loading
-    })
+      loading: state => state.markets.loading,
+      isEndOfList: state => state.markets.isEndOfList,
+      offset: state => state.markets.offset,
+      exchanges: state => state.exchanges.list
+    }),
+    params () {
+      return {
+        exchangeId: this.selectedExchange
+      }
+    }
   },
-  mounted () {
+  created () {
+    this.resetExchanges()
+    this.getExchanges({ limit: 100 })
+
+    this.resetMarkets()
     this.getMarkets({ exchangeId: this.selectedExchange })
-    this.getExchanges()
   },
   methods: {
+    ...mapMutations({
+      setLoading: 'markets/SET_LOADING'
+    }),
     ...mapActions({
       getMarkets: 'markets/getMarkets',
-      getExchanges: 'exchanges/getExchanges'
+      resetMarkets: 'markets/resetMarkets',
+      getExchanges: 'exchanges/getExchanges',
+      resetExchanges: 'exchanges/resetExchanges'
     }),
-    updateMarkets () {
+    filterMarketsByExchange () {
       this.$router.push(`/markets/${this.selectedExchange}`)
-      this.getMarkets({ exchangeId: this.selectedExchange })
-    }
+      this.loadMarkets({})
+    },
+    showMore () {
+      this.setLoading(true)
+      this.loadMarkets({ action: 'show_more' })
+    },
+    loadMarkets: debounce(function ({ action = '' }) {
+      this.getMarkets({ action, ...this.params })
+    }, 500)
   }
 }
 </script>

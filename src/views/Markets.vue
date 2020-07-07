@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <MarketsList/>
-  </div>
+  <MarketsList/>
 </template>
 
 <style scoped lang="scss">
