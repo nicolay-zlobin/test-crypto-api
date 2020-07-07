@@ -24,7 +24,7 @@
           @change="updateRoute">
           <option value="">--Choose an exchange--</option>
           <option
-            v-for="(item, i) in exchanges"
+            v-for="(item, i) in socketOnlyExchanges"
             :key="i"
             :value="item.exchangeId">
             {{ item.name }}
@@ -71,6 +71,11 @@ export default {
     exchangeId () {
       return this.selectedExchange || this.$route.params.exchangeId
     },
+    socketOnlyExchanges () {
+      return this.exchanges.filter(item => {
+        return item.socket === true
+      })
+    },
     title () {
       const exchangeId = this.$route.params.exchangeId
 
@@ -84,12 +89,16 @@ export default {
       }
     }
   },
-  mounted () {
-    this.getExchanges({ limit: 100 })
+  created () {
+    if (!this.$route.params.exchangeId) {
+      this.resetExchanges()
+      this.getExchanges({ limit: 100 })
+    }
   },
   methods: {
     ...mapActions({
-      getExchanges: 'exchanges/getExchanges'
+      getExchanges: 'exchanges/getExchanges',
+      resetExchanges: 'exchanges/resetExchanges'
     }),
     updateRoute () {
       this.$router.push(`/trades/${this.selectedExchange}`)

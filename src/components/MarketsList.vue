@@ -44,7 +44,7 @@
             class="is-pointer"
             @click="$router.push(`/trades/${item.exchangeId}`)">
             <td>
-              <span class="text-uppercase">{{ item.exchangeId }}  {{ item.rank }}</span>
+              <span class="text-uppercase">{{ item.exchangeId }}</span>
             </td>
 
             <td>
