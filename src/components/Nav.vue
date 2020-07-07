@@ -13,6 +13,7 @@
           <router-link active-class="active" to="/markets">Markets</router-link>
           <router-link active-class="active" to="/trades">Trades</router-link>
           <router-link active-class="active" to="/chart">Chart</router-link>
+          <router-link active-class="active" to="/about">About</router-link>
         </div>
       </div>
 
