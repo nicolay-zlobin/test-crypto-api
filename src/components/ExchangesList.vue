@@ -8,7 +8,7 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Name</th>
+            <th style="width: 285px; min-width: 285px">Name</th>
             <th>Volume (24Hr)</th>
             <th>Volume % (24Hr)</th>
             <th>Trading pairs</th>
@@ -23,7 +23,7 @@
             class="is-pointer"
             @click="$router.push(`/trades/${item.exchangeId}`) ">
             <td>
-              {{ item.name }} {{ item.rank }}
+              {{ item.name }}
             </td>
             <!-- Daily volume represented in USD -->
             <td>
@@ -76,7 +76,8 @@
         v-if="!isEndOfList"
         class="table-show-more"
         @click="showMore">
-        Show more
+        <span v-show="!loading">Show more</span>
+        <Spinner v-show="loading"/>
       </div>
     </div>
   </section>
@@ -84,10 +85,14 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex'
+import Spinner from '@/components/Functional/Spinner'
+import { debounce } from 'lodash'
 
 export default {
   name: 'ExchangesList',
-  components: {},
+  components: {
+    Spinner
+  },
   data () {
     return {}
   },
@@ -108,14 +113,19 @@ export default {
   methods: {
     ...mapMutations({
       setOffset: 'exchanges/SET_OFFSET',
-      setExchanges: 'exchanges/SET_EXCHANGES'
+      setExchanges: 'exchanges/SET_EXCHANGES',
+      setLoading: 'exchanges/SET_LOADING'
     }),
     ...mapActions({
       getExchanges: 'exchanges/getExchanges'
     }),
     showMore () {
+      this.setLoading(true)
+      this.loadExchanges()
+    },
+    loadExchanges: debounce(function () {
       this.getExchanges()
-    }
+    }, 500)
   }
 }
 </script>
