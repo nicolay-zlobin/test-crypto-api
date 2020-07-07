@@ -44,7 +44,7 @@
             class="is-pointer"
             @click="$router.push(`/trades/${item.exchangeId}`)">
             <td>
-              <span class="text-uppercase">{{ item.exchangeId }}</span>
+              <span class="text-uppercase">{{ item.exchangeId }}  {{ item.rank }}</span>
             </td>
 
             <td>
@@ -149,6 +149,7 @@ export default {
     }),
     filterMarketsByExchange () {
       this.$router.push(`/markets/${this.selectedExchange}`)
+      this.resetMarkets()
       this.loadMarkets({})
     },
     showMore () {
